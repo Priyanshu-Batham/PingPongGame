@@ -121,5 +121,8 @@ function animate() {
         ball.velocityY>0? ball.velocityY++ : ball.velocityY--
     }
     if(!gameOver) requestAnimationFrame(animate)
+    else{
+        window.location.reload();
+    }
 }
 animate()
