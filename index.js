@@ -1,9 +1,64 @@
 /**@type {HTMLCanvasElement} */
 
-alert("INSTRUCTIONS:\nPlayer1:\n 'W' = moveup\n 'S' = movedown\n\nPlayer2:\n 'O' = moveup\n 'L' = movedown")
+// alert("INSTRUCTIONS:\nPlayer1:\n 'W' = moveup\n 'S' = movedown\n\nPlayer2:\n 'O' = moveup\n 'L' = movedown")
 
+// -------------------------------- SRJ Changes ----------------------
+let startTime;
+let elapsedTime = 0;
+let timerInterval;
+function startStopwatch() {
+    
+    // Store the current time when starting the stopwatch
+    startTime = new Date().getTime() - elapsedTime;
 
+    // Update the stopwatch display every 10 milliseconds
+    timerInterval = setInterval(updateStopwatchDisplay, 10);
+}
+function updateStopwatchDisplay() {
+    // Calculate the elapsed time since starting the stopwatch
+    const currentTime = new Date().getTime();
+    elapsedTime = currentTime - startTime;
 
+    // Format the elapsed time
+    const formattedTime = formatTime(elapsedTime);
+
+    // Display the formatted time
+    document.getElementById('stopwatch').innerText = formattedTime;
+}
+
+// Function to format the time in HH:MM:SS format
+function formatTime(time) {
+    const hours = Math.floor(time / (1000 * 60 * 60));
+    const minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((time % (1000 * 60)) / 1000);
+    const milliseconds = Math.floor((time % 1000) / 10);
+
+    return (
+        pad(hours) + ':' +
+        pad(minutes) + ':' +
+        pad(seconds) + ':' +
+        pad(milliseconds)
+    );
+}
+
+// Function to add leading zeros to single-digit numbers
+function pad(number) {
+    return (number < 10 ? '0' : '') + number;
+}
+
+// Function to stop the stopwatch
+function stopStopwatch() {
+    clearInterval(timerInterval);
+}
+
+// for game over msg
+function showGameOverMessage() {
+    document.getElementById('gameOverMessage').classList.remove('hidden');
+    let rematchBtn = document.getElementById('rematchButton');
+    rematchBtn.focus();
+}
+
+// --------------------------------------------------------------
 let canvas = document.getElementById('canvas')
 let c = canvas.getContext('2d')
 
@@ -30,8 +85,11 @@ class Ball {
                 this.x = CANVAS_WIDTH - this.radius - 1
             }
             else{
-                alert("Player 1 Won The Game")
+                // ! Here
+                // alert("Player 1 Won The Game")
+             
                 gameOver = true
+
             }
         }
         if (this.x - this.radius <= 0) {
@@ -42,8 +100,11 @@ class Ball {
                 this.x = this.radius + 1
             }
             else{
-                alert("Player 2 Won The Game")
+                // ! Here ~ bhai isse dhundne mein 1 ghanta lag gya , kuch cmt maar dia kro yrr
+                // alert("Player 2 Won The Game")
+                
                 gameOver = true
+
             }
         }
        
@@ -108,6 +169,7 @@ document.querySelector('body').addEventListener('keypress', (e) => {
 
 let ballSpeedAccelerator = 0
 function animate() {
+   
     c.fillStyle = 'black'
     c.fillRect(0, 0, 1280, 720)
 
@@ -122,7 +184,17 @@ function animate() {
     }
     if(!gameOver) requestAnimationFrame(animate)
     else{
-        window.location.reload();
+        stopStopwatch();
+        showGameOverMessage();
+        // window.location.reload();
     }
 }
-animate()
+// animate()    -> moved to end welcome function
+function welcomeMessage(){
+    document.getElementById('welcomeMessage').classList.remove('hidden');
+}
+// function endWelcome(){
+//     // document.getElementById('welcomeMessage').style.display = "none";
+//     document.getElementById('welcomeMessage').classList.add('hidden');
+//     animate();
+// }
