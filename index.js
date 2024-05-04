@@ -189,12 +189,7 @@ function animate() {
         // window.location.reload();
     }
 }
-// animate()    -> moved to end welcome function
+// animate()    -> moved to end welcome function ~ HTML file
 function welcomeMessage(){
     document.getElementById('welcomeMessage').classList.remove('hidden');
 }
-// function endWelcome(){
-//     // document.getElementById('welcomeMessage').style.display = "none";
-//     document.getElementById('welcomeMessage').classList.add('hidden');
-//     animate();
-// }
