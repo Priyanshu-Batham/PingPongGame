@@ -3,11 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./assets/ball_icon2.png">
+    <link rel="stylesheet" href="style.css">
     <title>The Beginning</title>
     <link rel="stylesheet" href="./index.css">
 </head>
-<body>
+<body onload="welcomeMessage()">
+    <!-- add favicon -->
+    <br>
+    <center><div class="stopwatch" id="stopwatch">00 : 00 : 00.00</div></center>
     <canvas id="canvas" width="1280" height="720"></canvas>
+
+     <!-- for welcome -->
+     <div id="welcomeMessage" class="hidden"> 
+        <div class="msg">Welcome</div>
+        <div class="instructions">
+            <span>Player 1 :</span>
+            <ul>
+                <li>'W' = Moveup</li>
+                <li>'S' = Movedown</li>
+            </ul>
+            <span>Player 2 : </span>
+            <ul>
+                <li>'O' = Moveup</li>
+                <li>'L' = Movedown</li>
+            </ul>
+        </div>
+        <button id="welcomeButton" >Let's Play</button>
+
+    </div>
+     <!-- Hidden div for game over message -->
+     <div id="gameOverMessage" class="hidden">
+        <div class="msg">Game Over</div>
+        
+        <button id="rematchButton" onclick="ReLoadGame()">Rematch</button>
+    </div>
 </body>
 <script src="./index.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    welcomeMessage();
+    var startButton = document.getElementById('welcomeButton');
+
+    startButton.addEventListener('click', function() {
+        startStopwatch();
+        endWelcome(); 
+    });
+});
+
+function endWelcome(){
+    document.getElementById('welcomeMessage').classList.add('hidden');
+    animate(); // Moved the animate function call here
+}
+
+// rematch 
+
+function ReLoadGame(){
+    window.location.reload();
+}
+</script>
 </html>
