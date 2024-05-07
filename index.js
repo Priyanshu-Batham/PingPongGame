@@ -163,8 +163,8 @@ let p2 = new Player(CANVAS_WIDTH - 20, 70, 180, 50, 10)
 document.querySelector('body').addEventListener('keypress', (e) => {
     let key = e.key
     console.log(e)
-    if ((key === 'w' && p1.velocity > 0) || (key === 's' && p1.velocity < 0)) p1.velocity *= -1
-    if ((key === 'o' && p2.velocity > 0) || (key === 'l' && p2.velocity < 0)) p2.velocity *= -1
+    if ((key === 'w' || key === 'W' && p1.velocity > 0) || (key === 's'|| key === 'S' && p1.velocity < 0)) p1.velocity *= -1
+    if ((key === 'o' || key === 'O' && p2.velocity > 0) || (key === 'l' || key === 'L'&& p2.velocity < 0)) p2.velocity *= -1
 })
 
 let ballSpeedAccelerator = 0
